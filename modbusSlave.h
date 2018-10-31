@@ -109,7 +109,7 @@ template <class In, class Out, class UART>
 MBslave<In,Out,UART>::MBslave (UART& uart)
    : address     {1},
      arInRegs    {0},
-     arOutRegs   {0},
+     outRegs     {},
      arInRegsMin {0},
      arInRegsMax {0},
      uart        (uart),

@@ -5,6 +5,8 @@
 
 volatile uint32_t f;
 
+__IO auto rcc = RCC::create();
+
 
 int main(void)
 {
