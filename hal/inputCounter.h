@@ -31,7 +31,7 @@ template<class TIM_, class Pin_>
 InputCounter<TIM_,Pin_>::InputCounter()
 {
    static_assert (
-      (channel == 1) | (channel == 2),
+      (channel == 1) or (channel == 2),
       "Вывод контроллера не поддерживает функцию счёта внешнего сигнала"
    );
 

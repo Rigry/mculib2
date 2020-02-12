@@ -120,6 +120,8 @@ struct Output_bits {
 };
 
 struct Input_bits { 
+   enum Filter {no_filter = 0b0000, _2, _4, _8, _2_6, _2_8, _4_6, _4_8, _8_6, _8_8,
+                                    _16_5, _16_6, _16_8, _32_5, _32_6, _32_8};
    SelectionCompareMode CC1S     :2; // Bits 1:0 CC1S: Capture/Compare 1 selection
    uint32_t             IC1PSC   :2; // Bits 3:2 IC1PSC: Input capture 1 prescaler
    uint32_t             IC1F     :4; // Bits 7:4 IC1F[3:0]: Input capture 1 filter
@@ -129,7 +131,7 @@ struct Input_bits {
    uint32_t             res1     :16;
    SelectionCompareMode CC3S     :2;
    uint32_t             IC3PSC   :2;
-   uint32_t             IC3F     :4;
+   Filter               IC3F     :4;
    SelectionCompareMode CC4S     :2;
    uint32_t             IC4PSC   :2;
    uint32_t             IC4F     :4; 
@@ -232,6 +234,7 @@ public:
    using CompareMode          = TIM_detail::Output_bits::CompareMode;
    using SelectionCompareMode = TIM_detail::SelectionCompareMode;
    using Polarity             = TIM_detail::CCER_bits::Polarity;
+   using Filter               = TIM_detail::Input_bits::Filter;
 
    static const uint32_t Base = adr;
    enum Channel {_1 = 1, _2, _3, _4};
@@ -254,6 +257,7 @@ public:
    static void     compareInterruptDisable()      {Pointer::get()->DIER.CC3IE = false;}
    static void     clearInterruptFlags()          {Pointer::get()->SR.CC3IF = false;}
 
+   template<Filter v>             static void filter(){Pointer::get()->CCMR.input.IC3F = v;}
    template<Channel channel>      static void preloadEnable  ();
    template<Channel channel>      static void preloadDisable ();
    template<Channel channel>      static void compareEnable  ();
