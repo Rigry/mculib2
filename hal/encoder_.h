@@ -53,7 +53,7 @@ Encoder<TIM_, PinA, PinB, inverted>::Encoder()
    TIM_::clockEnable();
    TIM_::template compareEnable<TIM_::Channel::_3>();
 //    TIM_::template compareEnable<pinBchannel>();
-   TIM_::template set<TIM_::SlaveMode::Encoder1>();
+   TIM_::template set<TIM_::SlaveMode::Encoder3>();
    TIM_::template set<TIM_::CompareMode::ActiveOnMatch, TIM_::Channel::_3>();
 //    TIM_::template set<TIM_::CompareMode::ActiveOnMatch, pinBchannel>();
    TIM_::template selectCompareMode<TIM_::SelectionCompareMode::Input, pinAchannel>();
